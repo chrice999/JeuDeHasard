@@ -25,23 +25,39 @@
     </header>
 
     <main class="container">
-        <h1>Nos Templates PSD Professionnels</h1>
-        <p>Découvrez notre collection de templates Photoshop (PSD) pour accélérer vos projets de design.</p>
-        
-        <div id="templates-list-container" class="articles-list">
-            <!-- La liste des templates sera injectée ici par JavaScript -->
+        <div class="shop-layout">
+            <!-- Liste des produits -->
+            <div class="product-list-section">
+                <h1>Nos Templates PSD Professionnels</h1>
+                <p>Ajoutez des templates à votre panier pour les acheter.</p>
+                <div id="templates-grid-container" class="product-grid">
+                    <!-- Les templates seront injectés ici -->
+                </div>
+            </div>
+
+            <!-- Panier -->
+            <aside class="cart-section">
+                <h2>Votre Panier</h2>
+                <div id="cart-items">
+                    <p class="cart-empty">Votre panier est vide.</p>
+                </div>
+                <div class="cart-summary">
+                    <div class="cart-total">
+                        <strong>Total :</strong>
+                        <span id="cart-total-price">0 Ar</span>
+                    </div>
+                    <button id="checkout-button" class="button-primary" disabled>Passer au paiement</button>
+                </div>
+            </aside>
         </div>
     </main>
 
     <footer>
         <p>&copy; 2025 SimonService.help. Tous droits réservés.</p>
-        <div class="social-links">
-            <a href="https://www.facebook.com/jl.simon.2025" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-            <a href="https://wa.me/261326439245" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-        </div>
     </footer>
 
     <script src="js/main.js"></script>
     <script src="js/data.js"></script>
+    <script src="js/cart.js"></script>
 </body>
 </html>
