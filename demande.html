@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demande de Document - SimonService.help</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">SimonService.help</a>
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="articles.html">Tous les Articles</a></li>
+                <li><a href="templates.html">Templates PSD</a></li>
+                <li><a href="client.html">Nos Services</a></li>
+                <li><a href="gratuits.html">Ressources Gratuites</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="ia.html">Agent IA</a></li>
+            </ul>
+            <button id="theme-toggle" class="theme-btn"><i class="fas fa-moon"></i></button>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h1>Commande de Document d'Identité</h1>
+        <p>Remplissez ce formulaire avec attention pour la création de votre document. Le prix de base pour une Licence est de <strong>35,000 Ar</strong>.</p>
+        
+        <form id="document-request-form" class="contact-form-container" novalidate>
+            <div class="form-group">
+                <label for="service-type">Type de document demandé</label>
+                <select id="service-type" required>
+                    <option value="Driver Licence">Driver Licence (Permis de conduire)</option>
+                    <option value="Passport">Passport (Passeport)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="nationality">Nationalité</label>
+                <input type="text" id="nationality" placeholder="Ex: Malagasy" required>
+            </div>
+
+            <div class="form-group">
+                <label for="lastName">Nom de famille</label>
+                <input type="text" id="lastName" placeholder="Votre nom" required>
+            </div>
+
+            <div class="form-group">
+                <label for="firstName">Prénom(s)</label>
+                <input type="text" id="firstName" placeholder="Votre prénom" required>
+            </div>
+
+            <div class="form-group">
+                <label for="birthDate">Date de naissance</label>
+                <input type="date" id="birthDate" required>
+            </div>
+
+            <div class="form-group">
+                <label for="birthPlace">Lieu de naissance</label>
+                <input type="text" id="birthPlace" placeholder="Ex: Antananarivo" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="address">Adresse complète</label>
+                <input type="text" id="address" placeholder="Votre adresse actuelle" required>
+            </div>
+
+            <div class="form-group">
+                <label for="profession">Profession</label>
+                <input type="text" id="profession" placeholder="Ex: Étudiant" required>
+            </div>
+
+            <div class="form-group">
+                <label for="id-photo">Votre photo d'identité (type passeport)</label>
+                <input type="file" id="id-photo" accept="image/png, image/jpeg" required>
+            </div>
+
+            <div class="form-group checkbox-group" id="barcode-option-wrapper">
+                <input type="checkbox" id="has-barcode">
+                <label for="has-barcode">J'ai un code barre valide (le prix passe à 10,000 Ar)</label>
+            </div>
+
+            <div class="form-group" id="barcode-upload-group" style="display: none;">
+                <label for="barcode-photo">Image de votre code barre</label>
+                <input type="file" id="barcode-photo" accept="image/png, image/jpeg">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Votre Email (pour recevoir le fichier final)</label>
+                <input type="email" id="email" placeholder="votre.email@example.com" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="facebook">Lien de votre profil Facebook (facultatif)</label>
+                <input type="text" id="facebook" placeholder="https://facebook.com/votre.profil">
+            </div>
+
+            <div class="price-recap">
+                Prix total : <span id="total-price">35,000</span> Ar
+            </div>
+
+            <button type="submit">Passer la commande</button>
+        </form>
+        <div id="form-feedback" class="feedback-message" style="display:none;"></div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 SimonService.help. Tous droits réservés.</p>
+        <div class="social-links">
+            <a href="https://www.facebook.com/jl.simon.2025" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+            <a href="https://wa.me/261326439245" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('document-request-form');
+            const serviceType = document.getElementById('service-type');
+            const hasBarcodeCheckbox = document.getElementById('has-barcode');
+            const barcodeOptionWrapper = document.getElementById('barcode-option-wrapper');
+            const barcodeUploadGroup = document.getElementById('barcode-upload-group');
+            const barcodePhotoInput = document.getElementById('barcode-photo');
+            const totalPriceSpan = document.getElementById('total-price');
+            const feedbackDiv = document.getElementById('form-feedback');
+
+            const BASE_PRICE = 35000;
+            const DISCOUNT_PRICE = 10000;
+
+            function updatePrice() {
+                const isDriverLicense = serviceType.value === 'Driver Licence';
+                barcodeOptionWrapper.style.display = isDriverLicense ? 'flex' : 'none';
+
+                if (isDriverLicense && hasBarcodeCheckbox.checked) {
+                    totalPriceSpan.textContent = DISCOUNT_PRICE.toLocaleString('fr-FR');
+                    barcodeUploadGroup.style.display = 'block';
+                    barcodePhotoInput.required = true;
+                } else {
+                    totalPriceSpan.textContent = BASE_PRICE.toLocaleString('fr-FR');
+                    barcodeUploadGroup.style.display = 'none';
+                    barcodePhotoInput.required = false;
+                    if (!isDriverLicense) {
+                        hasBarcodeCheckbox.checked = false;
+                    }
+                }
+            }
+            
+            hasBarcodeCheckbox.addEventListener('change', updatePrice);
+            serviceType.addEventListener('change', updatePrice);
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                if (!form.checkValidity()) {
+                    alert('Veuillez remplir tous les champs obligatoires.');
+                    return;
+                }
+
+                const commandId = Math.floor(10000 + Math.random() * 90000);
+                const formData = new FormData(form);
+                let emailBody = `Nouvelle commande de document N°${commandId}\n\n`;
+                emailBody += "--------------------------------------\n";
+                for (let [key, value] of formData.entries()) {
+                    if (value instanceof File) {
+                        emailBody += `${key}: ${value.name} (${(value.size / 1024).toFixed(2)} KB)\n`;
+                    } else {
+                        emailBody += `${key}: ${value}\n`;
+                    }
+                }
+                emailBody += `Prix Total: ${totalPriceSpan.textContent} Ar\n`;
+                emailBody += "--------------------------------------\n";
+                emailBody += "IMPORTANT: Le client doit envoyer les fichiers image manuellement en réponse à cet email.\n";
+
+                const mailtoLink = `mailto:command@simonservice.help?subject=Commande N°${commandId}&body=${encodeURIComponent(emailBody)}`;
+                
+                const whatsappMsg = `Salut, je suis le propriétaire de la commande N°${commandId} passée sur simonservice.help.`;
+                const whatsappLink = `https://wa.me/261326439245?text=${encodeURIComponent(whatsappMsg)}`;
+
+                feedbackDiv.style.display = 'block';
+                feedbackDiv.style.color = 'green';
+                feedbackDiv.innerHTML = `
+                    <p><strong>Commande N°${commandId} enregistrée !</strong></p>
+                    <p>Pour finaliser, veuillez suivre ces deux étapes :</p>
+                    <ol>
+                        <li><strong>Envoyez-nous les informations par email :</strong> <a href="${mailtoLink}" target="_blank">Cliquez ici pour ouvrir votre client mail</a>. N'oubliez pas de joindre manuellement votre photo d'identité (et le code barre si nécessaire).</li>
+                        <li><strong>Contactez-nous sur WhatsApp :</strong> <a href="${whatsappLink}" target="_blank">Cliquez ici pour démarrer la conversation</a>.</li>
+                    </ol>
+                `;
+                
+                form.reset();
+                updatePrice();
+            });
+
+            updatePrice(); // Initial price check
+        });
+    </script>
+</body>
+</html>
