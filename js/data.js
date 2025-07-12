@@ -13,6 +13,17 @@ function getInitialProducts() {
 
 const products = getInitialProducts();
 
+function showDetails(productTitle, category) {
+    let message = `Détails pour : ${productTitle}.\n\n`;
+    if (category === 'payant') {
+        message += "Pour obtenir l'accès à ce service ou fichier, veuillez procéder à l'achat via la page de contact. Le mot de passe ou le lien d'accès vous sera envoyé personnellement.";
+    } else {
+        message += "Cet article est gratuit. Le lien de téléchargement est généralement direct. Si un mot de passe est requis, il sera indiqué dans la description ou fourni sur demande.";
+    }
+    alert(message);
+}
+
+
 function renderProducts(filter = 'all') {
     const productCatalog = document.getElementById('product-catalog');
     const freeResourcesList = document.getElementById('free-resources-list');
@@ -51,6 +62,9 @@ function renderProducts(filter = 'all') {
         const priceText = product.price > 0 
             ? `${product.price.toLocaleString('fr-FR')} Ar` 
             : 'Gratuit';
+        
+        // Préparer les arguments pour la fonction onclick
+        const productTitleEscaped = product.title.replace(/'/g, "\\'").replace(/"/g, "&quot;");
 
         if (displayMode === 'grid') {
             elementHtml = `
@@ -60,18 +74,18 @@ function renderProducts(filter = 'all') {
                         <h3>${product.title}</h3>
                         <p>${product.description.substring(0, 100)}...</p>
                         <p class="price">${priceText}</p>
-                        <button onclick="alert('Affichage des détails pour : ${product.title.replace(/'/g, "\\'")}')">Voir plus</button>
+                        <button onclick="showDetails('${productTitleEscaped}', '${product.category}')">Voir plus</button>
                     </div>
                 </div>
             `;
         } else if (displayMode === 'list') {
             elementHtml = `
-                <div class="article-list-item">
+                <div class="article-list-item" onclick="showDetails('${productTitleEscaped}', '${product.category}')" style="cursor: pointer;">
                     <div class="thumbnail">
                         <img src="${product.image}" alt="${product.title}" onerror="this.onerror=null;this.src='https://placehold.co/600x400/CCCCCC/FFFFFF?text=Image+non+disponible';">
                     </div>
                     <div class="details">
-                        <div class="tag">${product.type}</div>
+                        <div class="tag">${product.type.toUpperCase()}</div>
                         <h3>${product.title}</h3>
                         <p>${product.description}</p>
                         <div class="price">${priceText}</div>
@@ -90,7 +104,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const filterButtons = document.querySelectorAll('.filter-btn');
     filterButtons.forEach(button => {
-        button.addEventListener('click', () => {
+        button.addEventListener('click', (e) => {
+            e.stopPropagation(); // Empêche le clic de se propager si les boutons sont dans un élément cliquable
             filterButtons.forEach(btn => btn.classList.remove('active'));
             button.classList.add('active');
             renderProducts(button.dataset.filter);
