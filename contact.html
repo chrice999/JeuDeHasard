@@ -1,1 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - SimonService.help</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">SimonService.help</a>
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="client.html">Nos Services</a></li>
+                <li><a href="gratuits.html">Ressources Gratuites</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="ia.html">Agent IA</a></li>
+            </ul>
+            <button id="theme-toggle" class="theme-btn"><i class="fas fa-moon"></i></button>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h1>Contactez-nous</h1>
+        <p>Une question ou un projet ? Remplissez le formulaire ci-dessous.</p>
+        
+        <form id="contact-form" class="contact-form-container">
+            <input type="text" id="contact-name" placeholder="Votre nom" required>
+            <input type="email" id="contact-email" placeholder="Votre e-mail" required>
+            <textarea id="contact-message" placeholder="Votre message" rows="6" required></textarea>
+            <button type="submit">Envoyer le message</button>
+        </form>
+        <p id="form-feedback" class="feedback-message"></p>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 SimonService.help. Tous droits réservés.</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
 
