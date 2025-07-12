@@ -1,418 +1,78 @@
-/* --- Variables & Thème --- */
-:root {
-    --primary-color: #007BFF;
-    --secondary-color: #5a6268;
-    --background-color: #f4f7f9; /* Blanc cassé pour le fond */
-    --text-color: #212529;
-    --card-bg: #ffffff; /* Blanc pur pour les cartes */
-    --border-color: #e9ecef;
-    --header-bg: #ffffff;
-    --link-color: #0056b3;
-    --box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); /* Ombre plus prononcée */
-    --box-shadow-hover: 0 12px 30px rgba(0, 0, 0, 0.18); /* Ombre au survol */
+/* --- Styles pour la boutique et le panier --- */
+.shop-layout {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 2rem;
 }
 
-[data-theme="dark"] {
-    --primary-color: #4dabf7;
-    --secondary-color: #adb5bd;
-    --background-color: #121212; /* Noir profond pour le fond */
-    --text-color: #e9ecef;
-    --card-bg: #1e1e1e; /* Gris foncé pour les cartes */
-    --border-color: #33373a;
-    --header-bg: #242526; /* Gris un peu plus clair pour le header */
-    --link-color: #82c9ff;
-    --box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
-    --box-shadow-hover: 0 12px 30px rgba(0, 0, 0, 0.6);
-}
-
-/* --- Styles Généraux --- */
-body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    margin: 0;
-    background-color: var(--background-color);
-    color: var(--text-color);
-    line-height: 1.6;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-.container {
-    max-width: 1100px;
-    margin: 2rem auto;
-    padding: 0 1.5rem;
-}
-
-a {
-    color: var(--primary-color);
-    text-decoration: none;
-    transition: color 0.2s;
-}
-a.card-link {
-    text-decoration: none;
-    color: inherit;
-}
-
-a:hover {
-    color: var(--link-color);
-}
-
-img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    border-radius: 8px;
-}
-
-/* --- Header & Navigation --- */
-header {
-    background-color: var(--header-bg);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    padding: 1rem 1.5rem;
+.cart-section {
+    background-color: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: var(--box-shadow);
     position: sticky;
-    top: 0;
-    z-index: 1000;
-    transition: background-color 0.3s;
-    border-bottom: 1px solid var(--border-color);
+    top: 100px; /* Aligner sous le header */
+    height: fit-content;
 }
 
-nav {
+.cart-section h2 {
+    margin-top: 0;
+    text-align: center;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+}
+
+.cart-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1100px;
-    margin: 0 auto;
-}
-
-nav .logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: var(--primary-color);
-}
-
-nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    gap: 1.5rem;
-}
-
-nav ul a {
-    font-weight: 500;
-    color: var(--text-color);
-    padding-bottom: 5px;
-    border-bottom: 2px solid transparent;
-    transition: color 0.3s, border-bottom-color 0.3s;
-}
-
-nav ul a:hover, nav ul a.active {
-    color: var(--primary-color);
-    border-bottom-color: var(--primary-color);
-}
-
-.theme-btn {
-    background: none;
-    border: none;
-    color: var(--text-color);
-    font-size: 1.2rem;
-    cursor: pointer;
-    padding: 5px;
-}
-
-/* --- Sections & Cartes --- */
-.hero {
-    text-align: center;
-    padding: 4rem 1rem;
-    background-color: var(--card-bg);
-    border-radius: 12px;
-    margin-bottom: 2rem;
-    box-shadow: var(--box-shadow);
-}
-
-.hero h1 {
-    font-size: 2.8rem;
-    margin-bottom: 0.5rem;
-    color: var(--primary-color);
-}
-
-.services-overview h2, .freelance-section h2 {
-    text-align: center;
-    margin-bottom: 2rem;
-    font-size: 2rem;
-}
-
-.cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
-}
-
-.card {
-    background-color: var(--card-bg);
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: var(--box-shadow);
-    text-align: center;
-    transition: transform 0.3s, box-shadow 0.3s;
-    height: 100%;
-    box-sizing: border-box;
-}
-
-.card:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--box-shadow-hover);
-}
-
-.card .icon {
-    font-size: 2.5rem;
-    color: var(--primary-color);
     margin-bottom: 1rem;
+    font-size: 0.9rem;
 }
 
-.visitor-counter-section {
-    text-align: center;
-    margin-top: 3rem;
-    padding: 2rem;
-    background-color: var(--card-bg);
-    border-radius: 12px;
-    box-shadow: var(--box-shadow);
-}
-
-.visitor-counter-section p {
-    font-size: 1.2rem;
-    margin-bottom: 0.5rem;
-}
-
-#visitor-count {
-    font-weight: bold;
-    color: var(--primary-color);
-    font-size: 1.5rem;
-}
-
-/* --- Section Freelance --- */
-.freelance-section {
-    background-color: var(--card-bg);
-    padding: 2.5rem;
-    border-radius: 12px;
-    margin-top: 3rem;
-    box-shadow: var(--box-shadow);
-}
-
-.freelance-section p {
-    line-height: 1.8;
-    margin-bottom: 1.5rem;
-}
-
-.freelance-section .platforms {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    justify-content: center;
-    margin-top: 1.5rem;
-}
-
-.freelance-section .platform-tag {
-    background-color: var(--background-color);
-    color: var(--secondary-color);
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    font-weight: 500;
-    border: 1px solid var(--border-color);
-}
-
-/* --- Grille de Produits (Client & Gratuit) --- */
-.product-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.5rem;
-    margin-top: 2rem;
-}
-
-.product-card {
-    background-color: var(--card-bg);
-    border-radius: 12px;
-    box-shadow: var(--box-shadow);
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-.product-card:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--box-shadow-hover);
-}
-
-.product-card img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 0;
-}
-
-.product-content {
-    padding: 1.5rem;
+.item-name {
     flex-grow: 1;
-    display: flex;
-    flex-direction: column;
 }
 
-.product-content h3 {
-    margin-top: 0;
-    font-size: 1.4rem;
+.item-price {
+    font-weight: 500;
+    margin: 0 1rem;
 }
 
-.product-content .price {
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: var(--primary-color);
-    margin: 0.5rem 0;
-}
-
-.product-content button {
-    margin-top: auto;
-    padding: 0.75rem;
-    background-color: var(--primary-color);
+.remove-from-cart-btn {
+    background-color: #dc3545;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
     cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-.product-content button:hover {
-    background-color: var(--link-color);
-}
-
-/* --- Liste d'articles (style YouTube) --- */
-.articles-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
-
-.article-list-item {
-    display: flex;
-    flex-direction: row;
-    gap: 1.5rem;
-    background-color: var(--card-bg);
-    padding: 1rem;
-    border-radius: 12px;
-    box-shadow: var(--box-shadow);
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-.article-list-item:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--box-shadow-hover);
-}
-
-.article-list-item .thumbnail {
-    flex-shrink: 0;
-    width: 240px;
-}
-
-.article-list-item img {
-    width: 100%;
-    height: 135px;
-    object-fit: cover;
-}
-
-.article-list-item .details {
-    display: flex;
-    flex-direction: column;
-}
-
-.article-list-item h3 {
-    margin: 0 0 0.5rem 0;
-}
-
-.article-list-item .price {
-    font-weight: bold;
-    color: var(--primary-color);
-    margin-top: auto;
-    font-size: 1.1rem;
-}
-
-.article-list-item .tag {
-    font-size: 0.8rem;
-    font-weight: bold;
-    color: var(--secondary-color);
-    margin-bottom: 0.5rem;
-    text-transform: uppercase;
-}
-
-
-/* --- Filtres (Page Gratuits) --- */
-.filters {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    margin-bottom: 2rem;
-}
-
-.filter-btn {
-    padding: 0.5rem 1.5rem;
-    border: 1px solid var(--border-color);
-    background: transparent;
-    color: var(--text-color);
-    cursor: pointer;
-    border-radius: 20px;
-    transition: background-color 0.2s, color 0.2s;
-}
-
-.filter-btn.active, .filter-btn:hover {
-    background-color: var(--primary-color);
-    color: white;
-    border-color: var(--primary-color);
-}
-
-/* --- Formulaires & Chat --- */
-.contact-form-container, .chat-container {
-    background-color: var(--card-bg);
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: var(--box-shadow);
-    max-width: 700px;
-    margin: 2rem auto;
-}
-
-.form-group {
-    margin-bottom: 1.5rem;
-}
-.form-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 500;
-}
-.checkbox-group {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-.checkbox-group input {
-    width: auto;
-    margin-bottom: 0;
-}
-
-.price-recap {
-    font-size: 1.5rem;
-    font-weight: bold;
-    text-align: center;
-    margin: 2rem 0;
-    color: var(--primary-color);
-}
-
-input, textarea, select {
-    width: 100%;
-    padding: 0.75rem;
-    margin-bottom: 1rem;
-    border: 1px solid var(--border-color);
-    border-radius: 5px;
-    background-color: var(--background-color);
-    color: var(--text-color);
-    box-sizing: border-box;
     font-size: 1rem;
+    line-height: 22px;
+    text-align: center;
 }
 
-button[type="submit"], #send-btn {
+.cart-empty {
+    text-align: center;
+    color: var(--secondary-color);
+}
+
+.cart-summary {
+    border-top: 1px solid var(--border-color);
+    padding-top: 1rem;
+    margin-top: 1rem;
+}
+
+.cart-total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.button-primary {
     width: 100%;
     padding: 0.8rem;
     background-color: var(--primary-color);
@@ -422,125 +82,81 @@ button[type="submit"], #send-btn {
     cursor: pointer;
     font-size: 1.1rem;
     font-weight: bold;
-    transition: background-color 0.2s;
-}
-button[type="submit"]:hover, #send-btn:hover {
-     background-color: var(--link-color);
-}
-
-.feedback-message {
-    text-align: left;
-    margin-top: 1.5rem;
-    font-weight: normal;
-    background-color: var(--background-color);
-    padding: 1.5rem;
-    border-radius: 8px;
-    border: 1px solid var(--border-color);
-}
-.feedback-message ol {
-    padding-left: 20px;
-}
-.feedback-message li {
-    margin-bottom: 1rem;
-}
-
-/* --- Chat IA --- */
-.chat-container {
-    display: flex;
-    flex-direction: column;
-    height: 60vh;
-}
-
-.chat-box {
-    flex-grow: 1;
-    padding: 1rem;
-    overflow-y: auto;
-    border-bottom: 1px solid var(--border-color);
-}
-
-.chat-message {
-    margin-bottom: 1rem;
-    padding: 0.8rem 1.2rem;
-    border-radius: 18px;
-    max-width: 80%;
-    line-height: 1.5;
-}
-
-.chat-message.user {
-    background-color: var(--primary-color);
-    color: white;
-    border-bottom-right-radius: 4px;
-    margin-left: auto;
-}
-
-.chat-message.bot {
-    background-color: var(--background-color);
-    color: var(--text-color);
-    border: 1px solid var(--border-color);
-    border-bottom-left-radius: 4px;
-    margin-right: auto;
-}
-
-.chat-input-container {
-    display: flex;
-    padding: 1rem 0 0 0;
-}
-
-#user-input {
-    flex-grow: 1;
-    border: 1px solid var(--border-color);
-    border-radius: 20px;
-    padding: 0.75rem 1rem;
-    margin: 0;
-}
-
-#send-btn {
-    width: auto;
-    margin-left: 0.5rem;
-    padding: 0.75rem 1.5rem;
-    border-radius: 20px;
-}
-
-/* --- Footer --- */
-footer {
     text-align: center;
-    padding: 2rem 1rem;
-    margin-top: 3rem;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.button-primary:disabled {
+    background-color: var(--secondary-color);
+    cursor: not-allowed;
+}
+
+/* --- Styles pour la page de paiement --- */
+.checkout-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.order-summary, .payment-options {
     background-color: var(--card-bg);
-    border-top: 1px solid var(--border-color);
-    color: var(--secondary-color);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: var(--box-shadow);
 }
 
-.social-links {
-    margin-top: 1rem;
+.order-item, .order-total, .download-link-item {
     display: flex;
-    justify-content: center;
-    gap: 1.5rem;
+    justify-content: space-between;
+    padding: 0.5rem 0;
 }
 
-.social-links a {
-    font-size: 1.5rem;
-    color: var(--secondary-color);
-    transition: color 0.3s;
+.order-total {
+    font-size: 1.3rem;
+    font-weight: bold;
+    border-top: 2px solid var(--border-color);
+    margin-top: 1rem;
+    padding-top: 1rem;
 }
 
-.social-links a:hover {
-    color: var(--primary-color);
+.download-links {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px dashed var(--border-color);
 }
 
+.payment-choice {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: var(--background-color);
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    border: 1px solid var(--border-color);
+}
 
-/* --- Responsive --- */
-@media (max-width: 768px) {
-    nav ul {
-        display: none; /* Simplification pour mobile, un menu burger serait idéal */
-    }
-    .hero h1 {
-        font-size: 2.2rem;
-    }
-    .article-list-item {
-        flex-direction: column;
-    }
-    .article-list-item .thumbnail {
-        width: 100%;
+.payment-action {
+    padding: 1.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    margin-top: -0.5rem;
+    margin-bottom: 1rem;
+}
+
+.ussd-code {
+    background-color: var(--background-color);
+    padding: 1rem;
+    border-radius: 5px;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    text-align: center;
+    margin: 1rem 0;
+}
+
+@media (max-width: 900px) {
+    .shop-layout, .checkout-layout {
+        grid-template-columns: 1fr;
     }
 }
