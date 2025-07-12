@@ -8,7 +8,8 @@
     --border-color: #dee2e6;
     --header-bg: #ffffff;
     --link-color: #0056b3;
-    --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    --box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    --box-shadow-hover: 0 10px 20px rgba(0, 0, 0, 0.15);
 }
 
 [data-theme="dark"] {
@@ -20,7 +21,8 @@
     --border-color: #495057;
     --header-bg: #1e1e1e;
     --link-color: #82c9ff;
-    --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    --box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+    --box-shadow-hover: 0 10px 20px rgba(0, 0, 0, 0.5);
 }
 
 /* --- Styles Généraux --- */
@@ -53,12 +55,13 @@ img {
     max-width: 100%;
     height: auto;
     display: block;
+    border-radius: 8px;
 }
 
 /* --- Header & Navigation --- */
 header {
     background-color: var(--header-bg);
-    box-shadow: var(--box-shadow);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     padding: 1rem 1.5rem;
     position: sticky;
     top: 0;
@@ -93,6 +96,7 @@ nav ul a {
     color: var(--text-color);
     padding-bottom: 5px;
     border-bottom: 2px solid transparent;
+    transition: color 0.3s, border-bottom-color 0.3s;
 }
 
 nav ul a:hover, nav ul a.active {
@@ -109,13 +113,14 @@ nav ul a:hover, nav ul a.active {
     padding: 5px;
 }
 
-/* --- Sections & Cartes (Accueil) --- */
+/* --- Sections & Cartes --- */
 .hero {
     text-align: center;
     padding: 4rem 1rem;
     background-color: var(--card-bg);
-    border-radius: 8px;
+    border-radius: 12px;
     margin-bottom: 2rem;
+    box-shadow: var(--box-shadow);
 }
 
 .hero h1 {
@@ -139,15 +144,15 @@ nav ul a:hover, nav ul a.active {
 .card {
     background-color: var(--card-bg);
     padding: 2rem;
-    border-radius: 8px;
+    border-radius: 12px;
     box-shadow: var(--box-shadow);
     text-align: center;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+    transform: translateY(-8px);
+    box-shadow: var(--box-shadow-hover);
 }
 
 .card .icon {
@@ -178,17 +183,23 @@ nav ul a:hover, nav ul a.active {
 
 .product-card {
     background-color: var(--card-bg);
-    border-radius: 8px;
+    border-radius: 12px;
     box-shadow: var(--box-shadow);
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--box-shadow-hover);
 }
 
 .product-card img {
     width: 100%;
     height: 200px;
     object-fit: cover;
+    border-radius: 0;
 }
 
 .product-content {
@@ -224,16 +235,63 @@ nav ul a:hover, nav ul a.active {
 .product-content button:hover {
     background-color: var(--link-color);
 }
-.product-card .tag {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background-color: var(--primary-color);
-    color: white;
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-size: 0.9rem;
+
+/* --- Liste d'articles (style YouTube) --- */
+.articles-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 }
+
+.article-list-item {
+    display: flex;
+    flex-direction: row;
+    gap: 1.5rem;
+    background-color: var(--card-bg);
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: var(--box-shadow);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.article-list-item:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--box-shadow-hover);
+}
+
+.article-list-item .thumbnail {
+    flex-shrink: 0;
+    width: 240px;
+}
+
+.article-list-item img {
+    width: 100%;
+    height: 135px;
+    object-fit: cover;
+}
+
+.article-list-item .details {
+    display: flex;
+    flex-direction: column;
+}
+
+.article-list-item h3 {
+    margin: 0 0 0.5rem 0;
+}
+
+.article-list-item .price {
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-top: auto;
+    font-size: 1.1rem;
+}
+
+.article-list-item .tag {
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: var(--secondary-color);
+    margin-bottom: 0.5rem;
+}
+
 
 /* --- Filtres (Page Gratuits) --- */
 .filters {
@@ -259,13 +317,13 @@ nav ul a:hover, nav ul a.active {
     border-color: var(--primary-color);
 }
 
-/* --- Formulaires (Admin, Contact) --- */
-.form-container, .contact-form-container {
+/* --- Formulaires & Chat --- */
+.contact-form-container, .chat-container {
     background-color: var(--card-bg);
     padding: 2rem;
-    border-radius: 8px;
+    border-radius: 12px;
     box-shadow: var(--box-shadow);
-    max-width: 600px;
+    max-width: 700px;
     margin: 2rem auto;
 }
 
@@ -280,7 +338,7 @@ input, textarea, select {
     box-sizing: border-box;
 }
 
-button[type="submit"] {
+button[type="submit"], #send-btn {
     width: 100%;
     padding: 0.8rem;
     background-color: var(--primary-color);
@@ -289,6 +347,10 @@ button[type="submit"] {
     border-radius: 5px;
     cursor: pointer;
     font-size: 1rem;
+    transition: background-color 0.2s;
+}
+button[type="submit"]:hover, #send-btn:hover {
+     background-color: var(--link-color);
 }
 
 .feedback-message {
@@ -299,11 +361,6 @@ button[type="submit"] {
 
 /* --- Chat IA --- */
 .chat-container {
-    max-width: 700px;
-    margin: 2rem auto;
-    background-color: var(--card-bg);
-    border-radius: 8px;
-    box-shadow: var(--box-shadow);
     display: flex;
     flex-direction: column;
     height: 60vh;
@@ -311,7 +368,7 @@ button[type="submit"] {
 
 .chat-box {
     flex-grow: 1;
-    padding: 1.5rem;
+    padding: 1rem;
     overflow-y: auto;
     border-bottom: 1px solid var(--border-color);
 }
@@ -341,7 +398,7 @@ button[type="submit"] {
 
 .chat-input-container {
     display: flex;
-    padding: 1rem;
+    padding: 1rem 0 0 0;
 }
 
 #user-input {
@@ -353,15 +410,11 @@ button[type="submit"] {
 }
 
 #send-btn {
+    width: auto;
     margin-left: 0.5rem;
     padding: 0.75rem 1.5rem;
     border-radius: 20px;
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    cursor: pointer;
 }
-
 
 /* --- Footer --- */
 footer {
@@ -380,8 +433,10 @@ footer {
     .hero h1 {
         font-size: 2.2rem;
     }
-    .admin-content {
-        grid-template-columns: 1fr;
+    .article-list-item {
+        flex-direction: column;
+    }
+    .article-list-item .thumbnail {
+        width: 100%;
     }
 }
-
