@@ -1,25 +1,25 @@
 /* --- Variables & Thème --- */
 :root {
     --primary-color: #007BFF;
-    --secondary-color: #6c757d;
-    --background-color: #f8f9fa;
+    --secondary-color: #5a6268;
+    --background-color: #f4f7f9; /* Blanc cassé pour le fond */
     --text-color: #212529;
-    --card-bg: #ffffff;
-    --border-color: #dee2e6;
+    --card-bg: #ffffff; /* Blanc pur pour les cartes */
+    --border-color: #e9ecef;
     --header-bg: #ffffff;
     --link-color: #0056b3;
-    --box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-    --box-shadow-hover: 0 10px 20px rgba(0, 0, 0, 0.15);
+    --box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+    --box-shadow-hover: 0 10px 20px rgba(0, 0, 0, 0.12);
 }
 
 [data-theme="dark"] {
     --primary-color: #4dabf7;
     --secondary-color: #adb5bd;
-    --background-color: #121212;
+    --background-color: #121212; /* Noir profond pour le fond */
     --text-color: #e9ecef;
-    --card-bg: #1e1e1e;
-    --border-color: #495057;
-    --header-bg: #1e1e1e;
+    --card-bg: #1e1e1e; /* Gris foncé pour les cartes */
+    --border-color: #33373a;
+    --header-bg: #242526; /* Gris un peu plus clair pour le header */
     --link-color: #82c9ff;
     --box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
     --box-shadow-hover: 0 10px 20px rgba(0, 0, 0, 0.5);
@@ -67,6 +67,7 @@ header {
     top: 0;
     z-index: 1000;
     transition: background-color 0.3s;
+    border-bottom: 1px solid var(--border-color);
 }
 
 nav {
@@ -129,7 +130,7 @@ nav ul a:hover, nav ul a.active {
     color: var(--primary-color);
 }
 
-.services-overview h2 {
+.services-overview h2, .freelance-section h2 {
     text-align: center;
     margin-bottom: 2rem;
     font-size: 2rem;
@@ -164,13 +165,47 @@ nav ul a:hover, nav ul a.active {
 .visitor-counter-section {
     text-align: center;
     margin-top: 3rem;
-    font-size: 1.1rem;
-    color: var(--secondary-color);
+    padding: 2rem;
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: var(--box-shadow);
 }
 
 #visitor-count {
     font-weight: bold;
     color: var(--primary-color);
+    font-size: 1.5rem;
+}
+
+/* --- Section Freelance --- */
+.freelance-section {
+    background-color: var(--card-bg);
+    padding: 2.5rem;
+    border-radius: 12px;
+    margin-top: 3rem;
+    box-shadow: var(--box-shadow);
+}
+
+.freelance-section p {
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+}
+
+.freelance-section .platforms {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1.5rem;
+}
+
+.freelance-section .platform-tag {
+    background-color: var(--background-color);
+    color: var(--secondary-color);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 500;
+    border: 1px solid var(--border-color);
 }
 
 /* --- Grille de Produits (Client & Gratuit) --- */
@@ -421,9 +456,28 @@ footer {
     text-align: center;
     padding: 2rem 1rem;
     margin-top: 3rem;
+    background-color: var(--card-bg);
     border-top: 1px solid var(--border-color);
     color: var(--secondary-color);
 }
+
+.social-links {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.social-links a {
+    font-size: 1.5rem;
+    color: var(--secondary-color);
+    transition: color 0.3s;
+}
+
+.social-links a:hover {
+    color: var(--primary-color);
+}
+
 
 /* --- Responsive --- */
 @media (max-width: 768px) {
