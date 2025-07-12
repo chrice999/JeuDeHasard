@@ -2,21 +2,28 @@
 // C'est ce tableau que vous modifierez manuellement après avoir utilisé admin.html en local.
 function getInitialProducts() {
     return [
-        { id: 1, title: "Pack Sécurité AGTVT Pro", description: "Une solution complète pour protéger votre PME contre les ransomwares et le phishing.", price: 2495000, image: "https://placehold.co/600x400/007BFF/FFFFFF?text=AGTVT+Pro", type: "AGTVT", category: "payant" },
-        { id: 2, title: "Formation Développeur Web Complet", description: "Apprenez le HTML, CSS et JavaScript de A à Z avec ce pack complet.", price: 495000, image: "https://placehold.co/600x400/28A745/FFFFFF?text=Formation+Web", type: "Formation", category: "payant" },
-        { id: 3, title: "Template Portfolio Moderne", description: "Un template responsive et élégant pour présenter vos travaux.", price: 145000, image: "https://placehold.co/600x400/FFC107/000000?text=Template+Portfolio", type: "Template", category: "payant" },
-        { id: 4, title: "Tutoriel JavaScript Asynchrone", description: "Comprendre les promesses et async/await pour des applications web modernes et rapides.", price: 0, image: "https://placehold.co/600x400/17A2B8/FFFFFF?text=Tuto+JS", type: "Tuto", category: "gratuit" },
-        { id: 5, title: "Outil de Compression d'Image", description: "Un script simple pour optimiser le poids de vos images sans perte de qualité visible.", price: 0, image: "https://placehold.co/600x400/6C757D/FFFFFF?text=Outil+Image", type: "Outil", category: "gratuit" },
-        { id: 6, title: "Pack d'icônes SVG", description: "Collection de 50 icônes professionnelles pour vos projets web, entièrement personnalisables.", price: 0, image: "https://placehold.co/600x400/343A40/FFFFFF?text=Pack+Icones", type: "ZIP", category: "gratuit" }
+        { id: 1, title: "Création de Document d'Identité", description: "Service de création de passeport ou permis de conduire (Driver Licence) pour vérifications en ligne.", price: 35000, image: "https://placehold.co/600x400/007BFF/FFFFFF?text=Document+Pro", type: "Service", category: "payant" },
+        { id: 2, title: "Formation Vidéo : Freelancing de A à Z", description: "Un pack de fichiers vidéo pour apprendre les bases du travail sur les plateformes de micro-tâches.", price: 495000, image: "https://placehold.co/600x400/28A745/FFFFFF?text=Formation+Vidéo", type: "Formation", category: "payant" },
+        { id: 3, title: "Template PSD : Carte de Visite Moderne", description: "Un template Photoshop professionnel et facile à éditer pour vos cartes de visite.", price: 45000, image: "https://placehold.co/600x400/FFC107/000000?text=Template+PSD+1", type: "Template PSD", category: "payant" },
+        { id: 7, title: "Template PSD : Flyer Événementiel", description: "Créez des flyers percutants pour vos événements avec ce template PSD dynamique.", price: 65000, image: "https://placehold.co/600x400/fd7e14/FFFFFF?text=Template+PSD+2", type: "Template PSD", category: "payant" },
+        { id: 8, title: "Template PSD : CV Professionnel", description: "Un design de CV élégant pour vous démarquer auprès des recruteurs. Fichier PSD inclus.", price: 55000, image: "https://placehold.co/600x400/6f42c1/FFFFFF?text=Template+CV", type: "Template PSD", category: "payant" },
+        { id: 4, title: "Tutoriel Vidéo : Inscription Remotask", description: "Fichier vidéo vous guidant pas à pas pour réussir votre inscription et vos premiers tests sur Remotask.", price: 0, image: "https://placehold.co/600x400/17A2B8/FFFFFF?text=Tuto+Remotask", type: "Tuto", category: "gratuit" },
+        { id: 5, title: "Outil : Checklist du Freelance", description: "Un document PDF avec la checklist complète pour ne rien oublier avant de commencer une mission.", price: 0, image: "https://placehold.co/600x400/6C757D/FFFFFF?text=Outil+Checklist", type: "Outil", category: "gratuit" },
+        { id: 6, title: "Pack de Fichiers : Polices Premium", description: "Un fichier ZIP contenant une sélection de polices de caractères professionnelles pour vos designs.", price: 0, image: "https://placehold.co/600x400/343A40/FFFFFF?text=Pack+Polices", type: "ZIP", category: "gratuit" }
     ];
 }
 
 const products = getInitialProducts();
 
-function showDetails(productTitle, category) {
+function showDetails(productType, productTitle, category) {
+    if (productType === 'Service') {
+        window.location.href = 'demande.html';
+        return;
+    }
+
     let message = `Détails pour : ${productTitle}.\n\n`;
     if (category === 'payant') {
-        message += "Pour obtenir l'accès à ce service ou fichier, veuillez procéder à l'achat via la page de contact. Le mot de passe ou le lien d'accès vous sera envoyé personnellement.";
+        message += "Pour obtenir l'accès à ce service ou fichier, veuillez procéder à l'achat en nous contactant. Le mot de passe ou le lien d'accès vous sera envoyé personnellement après paiement.";
     } else {
         message += "Cet article est gratuit. Le lien de téléchargement est généralement direct. Si un mot de passe est requis, il sera indiqué dans la description ou fourni sur demande.";
     }
@@ -28,6 +35,7 @@ function renderProducts(filter = 'all') {
     const productCatalog = document.getElementById('product-catalog');
     const freeResourcesList = document.getElementById('free-resources-list');
     const allArticlesList = document.getElementById('articles-list-container');
+    const templatesList = document.getElementById('templates-list-container');
     
     let container, productList, displayMode;
 
@@ -46,6 +54,10 @@ function renderProducts(filter = 'all') {
         container = allArticlesList;
         productList = products; // Prend tous les produits
         displayMode = 'list';
+    } else if (templatesList) {
+        container = templatesList;
+        productList = products.filter(p => p.type === 'Template PSD');
+        displayMode = 'list';
     }
     else {
         return;
@@ -63,8 +75,8 @@ function renderProducts(filter = 'all') {
             ? `${product.price.toLocaleString('fr-FR')} Ar` 
             : 'Gratuit';
         
-        // Préparer les arguments pour la fonction onclick
         const productTitleEscaped = product.title.replace(/'/g, "\\'").replace(/"/g, "&quot;");
+        const productTypeEscaped = product.type.replace(/'/g, "\\'");
 
         if (displayMode === 'grid') {
             elementHtml = `
@@ -74,13 +86,13 @@ function renderProducts(filter = 'all') {
                         <h3>${product.title}</h3>
                         <p>${product.description.substring(0, 100)}...</p>
                         <p class="price">${priceText}</p>
-                        <button onclick="showDetails('${productTitleEscaped}', '${product.category}')">Voir plus</button>
+                        <button onclick="showDetails('${productTypeEscaped}', '${productTitleEscaped}', '${product.category}')">Voir plus</button>
                     </div>
                 </div>
             `;
         } else if (displayMode === 'list') {
             elementHtml = `
-                <div class="article-list-item" onclick="showDetails('${productTitleEscaped}', '${product.category}')" style="cursor: pointer;">
+                <div class="article-list-item" onclick="showDetails('${productTypeEscaped}', '${productTitleEscaped}', '${product.category}')" style="cursor: pointer;">
                     <div class="thumbnail">
                         <img src="${product.image}" alt="${product.title}" onerror="this.onerror=null;this.src='https://placehold.co/600x400/CCCCCC/FFFFFF?text=Image+non+disponible';">
                     </div>
@@ -98,14 +110,14 @@ function renderProducts(filter = 'all') {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    if (document.getElementById('product-catalog') || document.getElementById('free-resources-list') || document.getElementById('articles-list-container')) {
+    if (document.getElementById('product-catalog') || document.getElementById('free-resources-list') || document.getElementById('articles-list-container') || document.getElementById('templates-list-container')) {
         renderProducts();
     }
 
     const filterButtons = document.querySelectorAll('.filter-btn');
     filterButtons.forEach(button => {
         button.addEventListener('click', (e) => {
-            e.stopPropagation(); // Empêche le clic de se propager si les boutons sont dans un élément cliquable
+            e.stopPropagation(); 
             filterButtons.forEach(btn => btn.classList.remove('active'));
             button.classList.add('active');
             renderProducts(button.dataset.filter);
