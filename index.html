@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agent IA - SimonService.help</title>
+    <title>SimonService.help - Accueil</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
@@ -23,18 +23,35 @@
     </header>
 
     <main class="container">
-        <h1>Notre Agent IA à votre service</h1>
-        <p>Posez vos questions sur nos produits et notre agent IA vous répondra.</p>
+        <section class="hero">
+            <h1>Bienvenue sur SimonService.help</h1>
+            <p>Votre partenaire pour des solutions numériques innovantes et des formations de qualité.</p>
+        </section>
+
+        <section class="services-overview">
+            <h2>Nos Domaines d'Expertise</h2>
+            <div class="cards">
+                <div class="card">
+                    <i class="fas fa-shield-alt icon"></i>
+                    <h3>AGTVT (Anti-Hack)</h3>
+                    <p>Protection avancée de vos systèmes contre les menaces numériques. Sécurisez vos données et votre infrastructure avec nos solutions robustes.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-file-archive icon"></i>
+                    <h3>Formations en ZIP</h3>
+                    <p>Accédez à des formations complètes et compactes, téléchargeables au format ZIP pour un apprentissage flexible et hors ligne.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-palette icon"></i>
+                    <h3>Templates Web</h3>
+                    <p>Des modèles de sites web modernes et responsives, prêts à l'emploi pour lancer votre projet rapidement et avec un design professionnel.</p>
+                </div>
+            </div>
+        </section>
         
-        <div class="chat-container">
-            <div id="chat-box" class="chat-box">
-                <div class="chat-message bot">Bonjour ! Comment puis-je vous aider à comprendre nos services aujourd'hui ?</div>
-            </div>
-            <div class="chat-input-container">
-                <input type="text" id="user-input" placeholder="Posez votre question ici...">
-                <button id="send-btn">Envoyer</button>
-            </div>
-        </div>
+        <section class="visitor-counter-section">
+            <p>Vous êtes le <span id="visitor-count">0</span>ème visiteur de notre site. Merci !</p>
+        </section>
     </main>
 
     <footer>
@@ -42,78 +59,5 @@
     </footer>
 
     <script src="js/main.js"></script>
-    <script src="js/data.js"></script>
-    <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const sendBtn = document.getElementById('send-btn');
-        const userInput = document.getElementById('user-input');
-        const chatBox = document.getElementById('chat-box');
-        
-        // Les produits sont chargés depuis data.js et disponibles globalement
-        const products = getInitialProducts();
-
-        const getBotResponse = (userText) => {
-            const text = userText.toLowerCase().trim();
-            let response = "Je suis désolé, je n'ai pas compris votre question. Pouvez-vous reformuler ? Vous pouvez demander des informations sur le 'prix', la 'description' ou les 'types' de nos services comme AGTVT, Formation ou Template.";
-
-            const foundProduct = products.find(p => text.includes(p.title.toLowerCase()));
-
-            if (foundProduct) {
-                if (text.includes('prix')) {
-                    response = `Le prix de ${foundProduct.title} est de ${foundProduct.price}€.`;
-                } else if (text.includes('description')) {
-                    response = `Voici la description de ${foundProduct.title}: ${foundProduct.description}`;
-                } else {
-                    response = `${foundProduct.title} est un de nos services de type ${foundProduct.type}. Son prix est de ${foundProduct.price}€ et voici sa description : ${foundProduct.description}`;
-                }
-                return response;
-            }
-
-            if (text.includes('agtvt')) {
-                response = "AGTVT est notre solution de sécurité pour protéger vos systèmes contre les cyberattaques. Voulez-vous connaître le prix ou la description d'un produit AGTVT spécifique ?";
-            } else if (text.includes('formation')) {
-                response = "Nous proposons des formations complètes au format ZIP. Elles sont conçues pour être suivies à votre rythme.";
-            } else if (text.includes('template')) {
-                response = "Nos templates sont des modèles de site web modernes et prêts à l'emploi pour démarrer vos projets rapidement.";
-            } else if (text.includes('bonjour') || text.includes('salut')) {
-                response = "Bonjour ! En quoi puis-je vous aider concernant nos services ?";
-            } else if (text.includes('merci')) {
-                response = "De rien ! N'hésitez pas si vous avez d'autres questions.";
-            }
-            
-            return response;
-        };
-
-        const sendMessage = () => {
-            const userText = userInput.value;
-            if (userText.trim() === '') return;
-
-            const userMessageElem = document.createElement('div');
-            userMessageElem.className = 'chat-message user';
-            userMessageElem.textContent = userText;
-            chatBox.appendChild(userMessageElem);
-
-            setTimeout(() => {
-                const botResponse = getBotResponse(userText);
-                const botMessageElem = document.createElement('div');
-                botMessageElem.className = 'chat-message bot';
-                botMessageElem.textContent = botResponse;
-                chatBox.appendChild(botMessageElem);
-                chatBox.scrollTop = chatBox.scrollHeight;
-            }, 500);
-
-            userInput.value = '';
-            chatBox.scrollTop = chatBox.scrollHeight;
-        };
-
-        sendBtn.addEventListener('click', sendMessage);
-        userInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                sendMessage();
-            }
-        });
-    });
-    </script>
 </body>
 </html>
-
