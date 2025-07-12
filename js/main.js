@@ -13,14 +13,11 @@ document.addEventListener('DOMContentLoaded', () => {
         themeToggle.innerHTML = newTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
     });
 
-    // --- Compteur de Visiteurs ---
-    const visitorCountElement = document.getElementById('visitor-count');
-    if (visitorCountElement) {
-        let count = localStorage.getItem('visitorCount');
-        count = count ? parseInt(count) + 1 : 1;
-        localStorage.setItem('visitorCount', count);
-        visitorCountElement.textContent = count;
-    }
+    // --- Compteur de Visiteurs (Supprimé) ---
+    // Un vrai compteur de visiteurs nécessite un serveur (backend) ou un service tiers.
+    // Le compteur basé sur localStorage n'était pas fiable (comptait par appareil et non par visiteur unique).
+    // Il a été remplacé par une métrique marketing statique dans le HTML.
+    // Pour un vrai compteur, envisagez des services gratuits comme "GoatCounter" ou "hitcounter.io".
 
     // --- Formulaire de Contact ---
     const contactForm = document.getElementById('contact-form');
@@ -44,4 +41,3 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
-
