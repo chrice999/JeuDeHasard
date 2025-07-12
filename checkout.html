@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paiement - SimonService.help</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">SimonService.help</a>
+            <ul>
+                <li><a href="templates.html">Retour aux Templates</a></li>
+            </ul>
+            <button id="theme-toggle" class="theme-btn"><i class="fas fa-moon"></i></button>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h1>Finaliser votre commande</h1>
+        
+        <div class="checkout-layout">
+            <!-- Résumé de la commande -->
+            <div class="order-summary">
+                <h2>Résumé de la commande</h2>
+                <div id="order-items-list"></div>
+                <div class="order-total">
+                    <strong>Total à payer :</strong>
+                    <span id="order-total-price">0 Ar</span>
+                </div>
+                
+                <div class="download-links">
+                    <h3>Vos liens de téléchargement</h3>
+                    <p><small>Note : Les fichiers sont protégés par mot de passe. Vous recevrez le mot de passe après confirmation du paiement.</small></p>
+                    <div id="order-download-links"></div>
+                </div>
+            </div>
+
+            <!-- Options de paiement -->
+            <div class="payment-options">
+                <h2>Choisissez votre méthode de paiement</h2>
+                
+                <div class="payment-choice">
+                    <input type="radio" id="pay-whatsapp" name="payment-method" value="whatsapp" checked>
+                    <label for="pay-whatsapp">Contacter sur WhatsApp pour payer</label>
+                </div>
+                <div id="whatsapp-action" class="payment-action">
+                    <p>Vous serez redirigé vers WhatsApp pour finaliser le paiement avec nous.</p>
+                    <a href="#" id="whatsapp-payment-link" class="button-primary" target="_blank">Payer via WhatsApp</a>
+                </div>
+
+                <div class="payment-choice">
+                    <input type="radio" id="pay-telma" name="payment-method" value="telma">
+                    <label for="pay-telma">Payer par Telma MVola et confirmer</label>
+                </div>
+                <div id="telma-action" class="payment-action" style="display: none;">
+                    <p><strong>1. Composez le code suivant sur votre téléphone :</strong></p>
+                    <div id="telma-ussd-code" class="ussd-code"></div>
+                    <p><strong>2. Entrez la référence de la transaction ci-dessous :</strong></p>
+                    <input type="text" id="telma-reference" placeholder="Référence de paiement Telma">
+                    <a href="#" id="telma-confirm-link" class="button-primary">Confirmer le paiement</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 SimonService.help. Tous droits réservés.</p>
+        <div class="social-links">
+            <a href="https://www.facebook.com/jl.simon.2025" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+            <a href="https://wa.me/261326439245" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/cart.js"></script>
+</body>
+</html>
