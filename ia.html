@@ -13,10 +13,12 @@
             <a href="index.html" class="logo">SimonService.help</a>
             <ul>
                 <li><a href="index.html">Accueil</a></li>
+                <li><a href="articles.html">Tous les Articles</a></li>
+                <li><a href="templates.html">Templates PSD</a></li>
                 <li><a href="client.html">Nos Services</a></li>
                 <li><a href="gratuits.html">Ressources Gratuites</a></li>
                 <li><a href="contact.html">Contact</a></li>
-                <li><a href="ia.html">Agent IA</a></li>
+                <li><a href="ia.html" class="active">Agent IA</a></li>
             </ul>
             <button id="theme-toggle" class="theme-btn"><i class="fas fa-moon"></i></button>
         </nav>
@@ -38,81 +40,15 @@
     </main>
 
     <footer>
-        <p>&copy; 2024 SimonService.help. Tous droits réservés.</p>
+        <p>&copy; 2025 SimonService.help. Tous droits réservés.</p>
+        <div class="social-links">
+            <a href="https://www.facebook.com/jl.simon.2025" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+            <a href="https://wa.me/261326439245" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        </div>
     </footer>
 
     <script src="js/main.js"></script>
     <script src="js/data.js"></script>
-    <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const sendBtn = document.getElementById('send-btn');
-        const userInput = document.getElementById('user-input');
-        const chatBox = document.getElementById('chat-box');
-        
-        // Les produits sont chargés depuis data.js et disponibles globalement
-        const products = getInitialProducts();
-
-        const getBotResponse = (userText) => {
-            const text = userText.toLowerCase().trim();
-            let response = "Je suis désolé, je n'ai pas compris votre question. Pouvez-vous reformuler ? Vous pouvez demander des informations sur le 'prix', la 'description' ou les 'types' de nos services comme AGTVT, Formation ou Template.";
-
-            const foundProduct = products.find(p => text.includes(p.title.toLowerCase()));
-
-            if (foundProduct) {
-                if (text.includes('prix')) {
-                    response = `Le prix de ${foundProduct.title} est de ${foundProduct.price}€.`;
-                } else if (text.includes('description')) {
-                    response = `Voici la description de ${foundProduct.title}: ${foundProduct.description}`;
-                } else {
-                    response = `${foundProduct.title} est un de nos services de type ${foundProduct.type}. Son prix est de ${foundProduct.price}€ et voici sa description : ${foundProduct.description}`;
-                }
-                return response;
-            }
-
-            if (text.includes('agtvt')) {
-                response = "AGTVT est notre solution de sécurité pour protéger vos systèmes contre les cyberattaques. Voulez-vous connaître le prix ou la description d'un produit AGTVT spécifique ?";
-            } else if (text.includes('formation')) {
-                response = "Nous proposons des formations complètes au format ZIP. Elles sont conçues pour être suivies à votre rythme.";
-            } else if (text.includes('template')) {
-                response = "Nos templates sont des modèles de site web modernes et prêts à l'emploi pour démarrer vos projets rapidement.";
-            } else if (text.includes('bonjour') || text.includes('salut')) {
-                response = "Bonjour ! En quoi puis-je vous aider concernant nos services ?";
-            } else if (text.includes('merci')) {
-                response = "De rien ! N'hésitez pas si vous avez d'autres questions.";
-            }
-            
-            return response;
-        };
-
-        const sendMessage = () => {
-            const userText = userInput.value;
-            if (userText.trim() === '') return;
-
-            const userMessageElem = document.createElement('div');
-            userMessageElem.className = 'chat-message user';
-            userMessageElem.textContent = userText;
-            chatBox.appendChild(userMessageElem);
-
-            setTimeout(() => {
-                const botResponse = getBotResponse(userText);
-                const botMessageElem = document.createElement('div');
-                botMessageElem.className = 'chat-message bot';
-                botMessageElem.textContent = botResponse;
-                chatBox.appendChild(botMessageElem);
-                chatBox.scrollTop = chatBox.scrollHeight;
-            }, 500);
-
-            userInput.value = '';
-            chatBox.scrollTop = chatBox.scrollHeight;
-        };
-
-        sendBtn.addEventListener('click', sendMessage);
-        userInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                sendMessage();
-            }
-        });
-    });
-    </script>
+    <script src="js/ia.js"></script>
 </body>
 </html>
